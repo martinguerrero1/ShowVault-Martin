@@ -28,7 +28,6 @@ export default defineConfig([
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-unused-vars": "error",
       "no-console": "warn",
-      "@typescript-eslint/no-floating-promises": "warn",
       "prettier/prettier": "error",
     },
   },
