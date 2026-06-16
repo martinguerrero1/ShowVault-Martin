@@ -9,7 +9,7 @@ type AuthStore = {
   login: (email: string, password: string) => Promise<void>; // async para simular latencia
   logout: () => void;
   error: string | null;
-    isLoading: boolean,
+  isLoading: boolean;
 };
 
 
