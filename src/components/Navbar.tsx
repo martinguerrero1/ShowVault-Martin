@@ -11,28 +11,28 @@ function Navbar() {
   }
 
   return (
-    <header className="border-b bg-white">
+    <header className="bg-blue-50">
       <nav className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-6">
           <Link
             to="/"
             className="font-semibold text-slate-900 hover:text-slate-600"
           >
-            Home
+            Inicio
           </Link>
 
           <Link
             to="/shows"
             className="font-semibold text-slate-900 hover:text-slate-600"
           >
-            Shows
+            Series
           </Link>
 
           <Link
             to="/my-list"
             className="font-semibold text-slate-900 hover:text-slate-600"
           >
-            My List
+            Mi lista
           </Link>
         </div>
 
