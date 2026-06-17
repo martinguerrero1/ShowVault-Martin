@@ -3,6 +3,8 @@ import ShowCard from "../components/ShowCard";
 import { useShows } from "../hooks/useShows";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "../hooks/useDebounce";
+import LoadingMessage from "../components/LoadingMessage";
+import ErrorMessage from "../components/ErrorMessage";
 
 function BrowsePage() {
   //parametros de busqueda para la url
@@ -54,7 +56,7 @@ function BrowsePage() {
       <section className="mb-8 space-y-4">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <h1 className="text-3xl font-bold text-gray-900">
-            Browse Shows
+            Catálogo de series
           </h1>
 
           <div className="grid gap-3 sm:grid-cols-3 md:w-180">
@@ -88,7 +90,7 @@ function BrowsePage() {
               
               <select
                 id="genre"
-                // value={genre}
+                value={searchParams.get("genre") || "Todos"}
                 onChange={(e) => {
                   const value = e.target.value;
                 
@@ -140,9 +142,9 @@ function BrowsePage() {
         </div>
       </section>
 
-      {estado.status === "loading" && <p>Cargando shows...</p>}
+      {estado.status === "loading" && <LoadingMessage />}
 
-      {estado.status === "error" && <p>{estado.error}</p>}
+      {estado.status === "error" && <ErrorMessage message={estado.error} />}
 
       {estado.status === "success" && (
         <section className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
