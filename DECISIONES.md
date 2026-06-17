@@ -1,14 +1,15 @@
-STACK: 
-proy setup: Vite react typescript tailwind 
+STACK:
+proy setup: Vite react typescript tailwind
 
-libraries: react dom 
+libraries: react dom
 zustand
 
 toolkit: eslint prettier husky commitlint lint-staged
 
 feature 1 y 2: arquitectura del proyecto y autentificacion:
+
 - Tome la decision de usar zustand ya que es lo mas prolijo y organizado en el codigo, ademas tambien me brinda mayor facilidad para la persistencia de los datos.
-- 
+-
 
 - [x] Navegar entre rutas no recarga la página (SPA)
 - [x] La Navbar siempre es visible excepto en /login

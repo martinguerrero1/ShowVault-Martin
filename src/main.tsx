@@ -1,14 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import MainLayout from './layouts/MainLayout.tsx'
-import HomePage from './pages/HomePage.tsx'
-import BrowsePage from './pages/BrowsePage.tsx'
-import ShowDetailPage from './pages/ShowDetailPage.tsx'
-import MyListPage from './pages/MyListPage.tsx'
-import LoginPage from './pages/LoginPage.tsx'
-import ProtectedRoute from './components/ProtectedRoute.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout.tsx";
+import HomePage from "./pages/HomePage.tsx";
+import BrowsePage from "./pages/BrowsePage.tsx";
+import ShowDetailPage from "./pages/ShowDetailPage.tsx";
+import MyListPage from "./pages/MyListPage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
 const ruta = createBrowserRouter([
   {
@@ -17,36 +17,35 @@ const ruta = createBrowserRouter([
       {
         element: <HomePage />,
         path: "/",
-        index: true
+        index: true,
       },
       {
         element: <BrowsePage />,
-        path: "/shows"
+        path: "/shows",
       },
       {
         element: <ShowDetailPage />,
-        path: "/shows/:id"
+        path: "/shows/:id",
       },
       {
         element: <ProtectedRoute />,
         children: [
           {
             element: <MyListPage />,
-            path: "/my-list"
+            path: "/my-list",
           },
-        ]
+        ],
       },
-    ]
+    ],
   },
   {
-  element: <LoginPage />,
-  path: "/login"
+    element: <LoginPage />,
+    path: "/login",
   },
-  
-])
+]);
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={ruta}/>
+    <RouterProvider router={ruta} />
   </StrictMode>,
-)
+);

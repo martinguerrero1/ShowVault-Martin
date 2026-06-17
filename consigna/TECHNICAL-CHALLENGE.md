@@ -169,7 +169,12 @@ main.tsx
 // src/features/auth/mockUsers.ts
 export const MOCK_USERS = [
   { id: "1", name: "Ana García", email: "ana@test.com", password: "1234" },
-  { id: "2", name: "Carlos López", email: "carlos@test.com", password: "1234" },
+  {
+    id: "2",
+    name: "Carlos López",
+    email: "carlos@test.com",
+    password: "1234",
+  },
 ];
 ```
 
@@ -381,12 +386,12 @@ useEffect(() => {
         fetch(`https://api.tvmaze.com/shows/${id}`, { signal }).then((r) =>
           r.json(),
         ),
-        fetch(`https://api.tvmaze.com/shows/${id}/seasons`, { signal }).then(
-          (r) => r.json(),
-        ),
-        fetch(`https://api.tvmaze.com/shows/${id}/cast`, { signal }).then((r) =>
-          r.json(),
-        ),
+        fetch(`https://api.tvmaze.com/shows/${id}/seasons`, {
+          signal,
+        }).then((r) => r.json()),
+        fetch(`https://api.tvmaze.com/shows/${id}/cast`, {
+          signal,
+        }).then((r) => r.json()),
       ]);
       setShow({ status: "success", data: showData });
       setSeasons({ status: "success", data: seasonsData });
