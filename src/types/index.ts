@@ -12,6 +12,12 @@ export type Show = {
   summary: string | null;
 };
 
+//TIPADO DEL OBJETO RESPONSE DE BUSCAR UN SHOW
+export type SearchShowResponse = {
+  score: number;
+  show: Show;
+};
+
 export type Season = {
   id: number;
   number: number;

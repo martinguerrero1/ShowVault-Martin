@@ -7,7 +7,7 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const {login, isAuthenticated, isLoading, error} = useAuth()
+  const { login, isAuthenticated, isLoading, error } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ function LoginPage() {
   //uso un useeffect ya que el login tiene delay y no puedo manejar el dato isAuthenticated a tiempo real en el handlesubmit
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(from, {replace: true});
+      navigate(from, { replace: true });
     }
   }, [isAuthenticated]);
 
@@ -75,14 +75,12 @@ function LoginPage() {
             />
           </div>
 
-          <div className="text-red-700 text-center">
-            {error ? error : null}
-          </div>
+          <div className="text-red-700 text-center">{error ? error : null}</div>
 
           <button
             type="submit"
             disabled={isLoading}
-            className= "w-full rounded-md bg-slate-900 px-4 py-2 font-medium text-white transition hover:bg-slate-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            className="w-full rounded-md bg-slate-900 px-4 py-2 font-medium text-white transition hover:bg-slate-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
             {isLoading ? "Cargando..." : "Ingresar"}
           </button>
