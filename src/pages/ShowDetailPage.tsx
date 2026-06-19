@@ -2,11 +2,18 @@ import { useParams } from "react-router-dom";
 import { useShowDetails } from "../hooks/useShowDetail";
 import LoadingMessage from "../components/LoadingMessage";
 import ErrorMessage from "../components/ErrorMessage";
+import { useWatchlist } from "../features/watchlist/useWatchlist";
+import { useState } from "react";
+import { type WatchStatus } from "../types";
 
 const ShowDetailPage = () => {
   const { id } = useParams();
 
   const { show, seasons, cast } = useShowDetails(id);
+  
+  const { agregarShow } = useWatchlist()
+
+  const [watchStatus, setWatchStatus] = useState<WatchStatus>("plan-to-watch")
 
   if (show.status === "loading") {
     return (
@@ -29,6 +36,7 @@ const ShowDetailPage = () => {
   }
 
   const showData = show.data;
+
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">
@@ -57,6 +65,7 @@ const ShowDetailPage = () => {
             ))}
           </div>
 
+            {/* datos */}
           <div className="mt-6 grid gap-3 text-sm text-gray-700 sm:grid-cols-2">
             <p>
               <span className="font-semibold">Rating:</span>{" "}
@@ -75,14 +84,23 @@ const ShowDetailPage = () => {
             </p>
           </div>
 
+            {/* watch status */}
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <select className="rounded-lg border border-gray-300 px-4 py-2 text-sm">
+            <select className="rounded-lg border border-gray-300 px-4 py-2 text-sm"
+            value={watchStatus}
+            onChange={(e) => {
+              const value = e.target.value as WatchStatus
+              setWatchStatus(value)
+            }}
+            >
               <option value="plan-to-watch">Plan to watch</option>
               <option value="watching">Watching</option>
               <option value="completed">Completed</option>
             </select>
 
-            <button className="rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white transition hover:bg-gray-700">
+            <button className="rounded-lg bg-gray-900 px-5 py-2 text-sm font-medium text-white transition hover:bg-gray-700"
+            onClick={() => agregarShow(showData, watchStatus)}
+            >
               Agregar a mi lista
             </button>
           </div>

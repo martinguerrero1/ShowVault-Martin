@@ -121,7 +121,7 @@ function BrowsePage() {
               
               <select
                 id="sort"
-                // value={orden}
+                value={searchParams.get("sort") || "Sin order"}
                 onChange={(e) => {
                   const value = e.target.value;
                 
