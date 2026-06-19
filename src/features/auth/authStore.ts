@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { MOCK_USERS } from "./mockUsers";
 
-type AuthStore = {
+type AuthStoreValue = {
   user: { id: string; name: string; email: string } | null;
   isAuthenticated: boolean;
   login: (email: string, password: string) => Promise<void>; // async para simular latencia
@@ -11,7 +11,7 @@ type AuthStore = {
   isLoading: boolean;
 };
 
-export const useAuthStore = create<AuthStore>()(
+export const useAuthStore = create<AuthStoreValue>()(
   persist(
     (set) => ({
       user: null,
