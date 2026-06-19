@@ -86,12 +86,12 @@ function MyListPage() {
             </div>
           ) : 
           (
-          <div className="rounded-2xl border border-dashed border-zinc-700 bg-zinc-900/70 px-6 py-14 text-center">
-            <h2 className="text-xl font-semibold text-white">
+          <div className="rounded-2xl bg-indigo-100/70 px-6 py-14 text-center shadow-lg">
+            <h2 className="text-xl font-semibold text-black">
               No hay series en esta sección
             </h2>
 
-            <p className="mx-auto mt-3 max-w-md text-sm text-zinc-400">
+            <p className="mx-auto mt-3 max-w-md text-sm text-gray-800">
               Explorá el catálogo y agregá series a tu lista para empezar a
               organizarlas.
             </p>

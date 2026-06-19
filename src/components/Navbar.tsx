@@ -11,7 +11,7 @@ function Navbar() {
   }
 
   return (
-    <header className="bg-blue-50">
+    <header className="bg-linear-to-b from-indigo-200/90 to-white pb-5">
       <nav className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-6">
           <Link
