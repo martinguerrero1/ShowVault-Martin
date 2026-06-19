@@ -1,10 +1,12 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import ShowCard from "../components/ShowCard";
 import { useShows } from "../hooks/useShows";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "../hooks/useDebounce";
 import LoadingMessage from "../components/LoadingMessage";
 import ErrorMessage from "../components/ErrorMessage";
+import { useWatchlist } from "../features/watchlist/useWatchlist";
+import type { Show } from "../types";
 
 function BrowsePage() {
   //parametros de busqueda para la url
@@ -28,16 +30,17 @@ function BrowsePage() {
   [shows]
   )
 
+  //shows filtrados y memorizados
   const showsFiltrados = useMemo(() => {
     //copia de show para filtrar
     let resultado = shows;
-
+    
     //filtro genero
     const genero = searchParams.get("genre") || "Todos"
     if (genero !== "Todos") {
       resultado = resultado.filter((s) => s.genres.includes(genero));
     }
-
+    
     //filtro orden
     const orden = searchParams.get("sort") || ""
     if (orden === "rating") {
@@ -50,7 +53,15 @@ function BrowsePage() {
     }
     return resultado;
   }, [shows, searchParams]);
+  
 
+  //accion para agregar a la lista y memorizacion
+  const { agregarShow } = useWatchlist()
+  const handleAgregarShow = useCallback(
+    (show: Show) => agregarShow(show, "plan-to-watch"),[agregarShow]
+  )
+  
+  
   return (
     <main className="mx-auto max-w-7xl p-6">
       <section className="mb-8 space-y-4">
@@ -149,7 +160,7 @@ function BrowsePage() {
       {estado.status === "success" && (
         <section className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {showsFiltrados.map((show) => (
-            <ShowCard key={show.id} show={show} />
+            <ShowCard key={show.id} show={show} onAgregarALista={handleAgregarShow} />
           ))}
         </section>
       )}

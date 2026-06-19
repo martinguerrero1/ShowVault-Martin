@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { WatchStatus } from "../types";
 import WatchlistCard from "../components/WatchlistCard";
 import { useWatchlist } from "../features/watchlist/useWatchlist";
@@ -15,10 +15,15 @@ function MyListPage() {
 
   const { items, quitarShow, cambiarStatus, totalPorStatus } = useWatchlist();
 
+  //Shows filtrados por watch status y memorizados
   const showsPorTab = useMemo(
     () => items.filter((item) => item.status === watchStatus),
     [items, watchStatus],
   );
+
+  //acciones memorizadas para react.memo de la WatchlistCard
+  const handleQuitarShow = useCallback((showId: number) => quitarShow(showId), [quitarShow])
+  const handleCambiarStatus = useCallback((showId: number, status: WatchStatus) => cambiarStatus(showId, status), [cambiarStatus])
 
   return (
     <main className="mx-auto min-h-screen max-w-7xl px-6 py-10 text-zinc-100">
@@ -73,8 +78,8 @@ function MyListPage() {
                   <WatchlistCard
                     key={show.id}
                     show={show}
-                    onRemove={() => quitarShow(show.id)}
-                    onChangeStatus={(status) => cambiarStatus(show.id, status)}
+                    onRemove={handleQuitarShow}
+                    onChangeStatus={handleCambiarStatus}
                   />
                 ))}
              
