@@ -1,3 +1,4 @@
+import React from "react";
 import type { ShowEnLista, WatchStatus } from "../types";
 
 const STATUS_OPTIONS: { estado: string; value: WatchStatus }[] = [
@@ -12,8 +13,8 @@ function WatchlistCard({
   onChangeStatus,
 }: {
   show: ShowEnLista;
-  onRemove: () => void;
-  onChangeStatus: (status: WatchStatus) => void;
+  onRemove: (showId: number) => void;
+  onChangeStatus: (showId: number, status: WatchStatus) => void;
 }) {
   const imageUrl = show.image?.medium ?? "/placeholder-show.png";
 
@@ -22,7 +23,7 @@ function WatchlistCard({
       <img
         src={imageUrl}
         alt={show.name}
-        className="h-72 w-full object-cover"
+        className="h-64 w-full object-cover"
       />
 
       <div className="space-y-4 p-4">
@@ -39,7 +40,7 @@ function WatchlistCard({
 
         <select
           value={show.status}
-          onChange={(e) => onChangeStatus(e.target.value as WatchStatus)}
+          onChange={(e) => onChangeStatus(show.id, e.target.value as WatchStatus)}
           className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 outline-none transition focus:border-indigo-500"
         >
           {STATUS_OPTIONS.map((status) => (
@@ -51,7 +52,7 @@ function WatchlistCard({
 
         <button
           type="button"
-          onClick={onRemove}
+          onClick={() => onRemove(show.id)}
           className="w-full rounded-xl border border-red-500/40 px-3 py-2 text-sm font-semibold text-red-400 transition hover:bg-red-500 hover:text-white"
         >
           Quitar de mi lista
@@ -61,4 +62,4 @@ function WatchlistCard({
   );
 }
 
-export default WatchlistCard;
+export default React.memo(WatchlistCard);
